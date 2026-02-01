@@ -17,6 +17,10 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to MiniiERP API' });
 });
 
+// Product routes
+const productRoutes = require('./modules/products/product.routes');
+app.use('/api/products', productRoutes);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
