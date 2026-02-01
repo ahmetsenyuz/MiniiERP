@@ -1,7 +1,7 @@
 // Purchase Order Controller
-const PurchaseOrder = require('./purchase-order.model');
+const PurchaseOrder = require('./purchase-order.model.js');
 const Supplier = require('../suppliers');
-const Product = require('../products/product.model');
+const Product = require('../products/product.model.js');
 
 // Create a new purchase order
 const createPurchaseOrder = async (req, res) => {
@@ -9,7 +9,7 @@ const createPurchaseOrder = async (req, res) => {
     const { supplierId, items } = req.body;
 
     // Validate supplier exists
-    const supplier = await Supplier.findById(supplierId);
+    const supplier = await Supplier.findByPk(supplierId);
     if (!supplier) {
       return res.status(400).json({ error: 'Invalid supplier ID' });
     }
@@ -17,16 +17,16 @@ const createPurchaseOrder = async (req, res) => {
     // Validate all products exist and calculate total
     let totalAmount = 0;
     const orderItems = [];
-    
+
     for (const item of items) {
-      const product = await Product.findById(item.productId);
+      const product = await Product.findByPk(item.productId);
       if (!product) {
         return res.status(400).json({ error: `Product with ID ${item.productId} not found` });
       }
-      
+
       const itemTotal = product.price * item.quantity;
       totalAmount += itemTotal;
-      
+
       orderItems.push({
         productId: item.productId,
         quantity: item.quantity,
@@ -61,7 +61,7 @@ const getAllPurchaseOrders = async (req, res) => {
 };
 
 // Get purchase order by ID
-const getPurchaseOrderById = async (req, res) => {
+const getPurchaseOrderByById = async (req, res) => {
   try {
     const purchaseOrder = await PurchaseOrder.findById(req.params.id).populate('supplierId', 'name');
     if (!purchaseOrder) {
@@ -87,7 +87,7 @@ const confirmPurchaseOrder = async (req, res) => {
 
     // Update inventory for each item
     for (const item of purchaseOrder.items) {
-      const product = await Product.findById(item.productId);
+      const product = await Product.findByPk(item.productId);
       if (product) {
         product.stockQuantity += item.quantity;
         await product.save();
@@ -106,6 +106,6 @@ const confirmPurchaseOrder = async (req, res) => {
 module.exports = {
   createPurchaseOrder,
   getAllPurchaseOrders,
-  getPurchaseOrderById,
+  getPurchaseOrderByById,
   confirmPurchaseOrder
 };
