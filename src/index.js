@@ -18,8 +18,16 @@ app.get('/', (req, res) => {
 });
 
 // Product routes
-const productRoutes = require('./modules/products/product.routes');
+const productRoutes = require('./modules/products/product.routes.js');
 app.use('/api/products', productRoutes);
+
+// Purchase order routes
+const purchaseOrderRoutes = require('./modules/purchase-orders/purchase-order.routes.js');
+app.use('/api/purchase-orders', purchaseOrderRoutes);
+
+// Sales order routes
+const salesOrderRoutes = require('./modules/sales-orders/sales-order.routes.js');
+app.use('/api/sales-orders', salesOrderRoutes);
 
 // Start server
 app.listen(PORT, () => {
