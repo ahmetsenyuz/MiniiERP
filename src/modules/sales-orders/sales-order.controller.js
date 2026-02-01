@@ -9,7 +9,7 @@ const createSalesOrder = async (req, res) => {
     const { customerId, items } = req.body;
 
     // Validate customer exists
-    const customer = await Customer.findById(customerId);
+    const customer = await Customer.findByPk(customerId);
     if (!customer) {
       return res.status(400).json({ error: 'Invalid customer ID' });
     }
@@ -19,7 +19,7 @@ const createSalesOrder = async (req, res) => {
     const orderItems = [];
 
     for (const item of items) {
-      const product = await Product.findById(item.productId);
+      const product = await Product.findByPk(item.productId);
       if (!product) {
         return res.status(400).json({ error: `Product with ID ${item.productId} not found` });
       }
@@ -27,7 +27,7 @@ const createSalesOrder = async (req, res) => {
       // Check inventory availability
       if (product.stockQuantity < item.quantity) {
         return res.status(400).json({ 
-          error: 'Insufficient inventory for product', 
+          error: 'Insufficient inventory for product',
           productId: item.productId,
           available: product.stockQuantity,
           requested: item.quantity
@@ -71,7 +71,7 @@ const getAllSalesOrders = async (req, res) => {
 };
 
 // Get sales order by ID
-const getSalesOrderById = async (req, res) => {
+const getSalesOrderByById = async (req, res) => {
   try {
     const salesOrder = await SalesOrder.findById(req.params.id).populate('customerId', 'name email');
     if (!salesOrder) {
@@ -97,7 +97,7 @@ const confirmSalesOrder = async (req, res) => {
 
     // Update inventory for each item
     for (const item of salesOrder.items) {
-      const product = await Product.findById(item.productId);
+      const product = await Product.findByPk(item.productId);
       if (product) {
         product.stockQuantity -= item.quantity;
         await product.save();
@@ -113,7 +113,7 @@ const confirmSalesOrder = async (req, res) => {
   }
 };
 
-// Update sales order status to completed
+// Complete sales order and update inventory
 const completeSalesOrder = async (req, res) => {
   try {
     const salesOrder = await SalesOrder.findById(req.params.id);
@@ -137,7 +137,7 @@ const completeSalesOrder = async (req, res) => {
 module.exports = {
   createSalesOrder,
   getAllSalesOrders,
-  getSalesOrderById,
+  getSalesOrderByById,
   confirmSalesOrder,
   completeSalesOrder
 };
