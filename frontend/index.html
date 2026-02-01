@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-ERP System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Mini-ERP System</h1>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#suppliers">Suppliers</a></li>
+                <li><a href="#inventory">Inventory</a></li>
+                <li><a href="#purchase-orders">Purchase Orders</a></li>
+                <li><a href="#sales-orders">Sales Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <div class="metrics">
+                <div class="metric-card">
+                    <h3>Total Products</h3>
+                    <p id="total-products">Loading...</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Total Suppliers</h3>
+                    <p id="total-suppliers">Loading...</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Pending Purchase Orders</h3>
+                    <p id="pending-purchase-orders">Loading...</p>
+                </div>
+                <div class="metric-card">
+                    <h3>Pending Sales Orders</h3>
+                    <p id="pending-sales-orders">Loading...</p>
+                </div>
+            </div>
+            <div class="alerts">
+                <h3>Recent Alerts</h3>
+                <ul id="alert-list">
+                    <!-- Alerts will be populated here -->
+                </ul>
+            </div>
+        </section>
+
+        <section id="products">
+            <h2>Products</h2>
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <label for="product-name">Product Name:</label>
+                <input type="text" id="product-name" required>
+                
+                <label for="product-description">Description:</label>
+                <textarea id="product-description"></textarea>
+                
+                <label for="product-price">Price:</label>
+                <input type="number" id="product-price" step="0.01" required>
+                
+                <label for="product-category">Category:</label>
+                <input type="text" id="product-category" required>
+                
+                <button type="submit">Save Product</button>
+                <button type="button" id="cancel-product-edit">Cancel</button>
+            </form>
+            
+            <table id="products-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Product rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="suppliers">
+            <h2>Suppliers</h2>
+            <form id="supplier-form">
+                <input type="hidden" id="supplier-id">
+                <label for="supplier-name">Supplier Name:</label>
+                <input type="text" id="supplier-name" required>
+                
+                <label for="supplier-contact">Contact Person:</label>
+                <input type="text" id="supplier-contact" required>
+                
+                <label for="supplier-email">Email:</label>
+                <input type="email" id="supplier-email" required>
+                
+                <label for="supplier-phone">Phone:</label>
+                <input type="tel" id="supplier-phone" required>
+                
+                <button type="submit">Save Supplier</button>
+                <button type="button" id="cancel-supplier-edit">Cancel</button>
+            </form>
+            
+            <table id="suppliers-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Contact Person</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Supplier rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="inventory">
+            <h2>Inventory</h2>
+            <form id="inventory-form">
+                <input type="hidden" id="inventory-id">
+                <label for="inventory-product">Product:</label>
+                <select id="inventory-product" required></select>
+                
+                <label for="inventory-quantity">Quantity:</label>
+                <input type="number" id="inventory-quantity" min="0" required>
+                
+                <label for="inventory-location">Location:</label>
+                <input type="text" id="inventory-location" required>
+                
+                <button type="submit">Save Inventory</button>
+                <button type="button" id="cancel-inventory-edit">Cancel</button>
+            </form>
+            
+            <table id="inventory-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Location</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Inventory rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="purchase-orders">
+            <h2>Purchase Orders</h2>
+            <form id="purchase-order-form">
+                <input type="hidden" id="purchase-order-id">
+                <label for="purchase-order-supplier">Supplier:</label>
+                <select id="purchase-order-supplier" required></select>
+                
+                <label for="purchase-order-date">Order Date:</label>
+                <input type="date" id="purchase-order-date" required>
+                
+                <label for="purchase-order-status">Status:</label>
+                <select id="purchase-order-status" required>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                </select>
+                
+                <button type="submit">Save Purchase Order</button>
+                <button type="button" id="cancel-purchase-order-edit">Cancel</button>
+            </form>
+            
+            <table id="purchase-orders-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Supplier</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Purchase order rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="sales-orders">
+            <h2>Sales Orders</h2>
+            <form id="sales-order-form">
+                <input type="hidden" id="sales-order-id">
+                <label for="sales-order-customer">Customer:</label>
+                <input type="text" id="sales-order-customer" required>
+                
+                <label for="sales-order-date">Order Date:</label>
+                <input type="date" id="sales-order-date" required>
+                
+                <label for="sales-order-status">Status:</label>
+                <select id="sales-order-status" required>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                </select>
+                
+                <button type="submit">Save Sales Order</button>
+                <button type="button" id="cancel-sales-order-edit">Cancel</button>
+            </form>
+            
+            <table id="sales-orders-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sales order rows will be populated here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
