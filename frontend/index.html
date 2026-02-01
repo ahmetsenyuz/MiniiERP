@@ -164,16 +164,11 @@
                 <label for="purchase-order-supplier">Supplier:</label>
                 <select id="purchase-order-supplier" required></select>
                 
-                <label for="purchase-order-date">Order Date:</label>
-                <input type="date" id="purchase-order-date" required>
+                <label for="purchase-order-product">Product:</label>
+                <select id="purchase-order-product" required></select>
                 
-                <label for="purchase-order-status">Status:</label>
-                <select id="purchase-order-status" required>
-                    <option value="pending">Pending</option>
-                    <option value="approved">Approved</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                </select>
+                <label for="purchase-order-quantity">Quantity:</label>
+                <input type="number" id="purchase-order-quantity" min="1" required>
                 
                 <button type="submit">Save Purchase Order</button>
                 <button type="button" id="cancel-purchase-order-edit">Cancel</button>
@@ -202,16 +197,11 @@
                 <label for="sales-order-customer">Customer:</label>
                 <input type="text" id="sales-order-customer" required>
                 
-                <label for="sales-order-date">Order Date:</label>
-                <input type="date" id="sales-order-date" required>
+                <label for="sales-order-product">Product:</label>
+                <select id="sales-order-product" required></select>
                 
-                <label for="sales-order-status">Status:</label>
-                <select id="sales-order-status" required>
-                    <option value="pending">Pending</option>
-                    <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                </select>
+                <label for="sales-order-quantity">Quantity:</label>
+                <input type="number" id="sales-order-quantity" min="1" required>
                 
                 <button type="submit">Save Sales Order</button>
                 <button type="button" id="cancel-sales-order-edit">Cancel</button>
