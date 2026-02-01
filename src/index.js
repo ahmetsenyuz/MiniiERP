@@ -29,6 +29,10 @@ app.use('/api/purchase-orders', purchaseOrderRoutes);
 const salesOrderRoutes = require('./modules/sales-orders/sales-order.routes.js');
 app.use('/api/sales-orders', salesOrderRoutes);
 
+// Dashboard routes
+const dashboardRoutes = require('./modules/dashboard/dashboard.routes.js');
+app.use('/api/dashboard', dashboardRoutes);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
